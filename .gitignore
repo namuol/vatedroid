@@ -3,7 +3,6 @@ build.xml
 local.properties
 proguard-project.txt
 project.properties
-libs
 obj
 bin
 gen
