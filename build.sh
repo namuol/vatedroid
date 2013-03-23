@@ -74,7 +74,7 @@ android update project --target $PLATFORM_VERSION --path .
 
 echo Building v8 for android target...
 pushd $V8_SRC_ROOT
-make android_arm.release -j4
+make android_arm.release -j$NUM_CPUS
 popd
 
 echo Copying static library files... 
@@ -84,7 +84,7 @@ echo Copying v8 header files...
 cp $V8_SRC_ROOT/include/* include/.
 
 echo Building NDK libraries...
-$ANDROID_NDK_ROOT/ndk-build
+$ANDROID_NDK_ROOT/ndk-build -j$NUM_CPUS
 
 echo Building $ANT_TARGET APK...
 ant $ANT_TARGET
