@@ -1,0 +1,10 @@
+ant.properties
+build.xml
+local.properties
+proguard-project.txt
+project.properties
+res
+libs
+obj
+bin
+gen
