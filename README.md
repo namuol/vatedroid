@@ -1,7 +1,7 @@
 # vatedroid
 vatedroid (v8 droid) is a simple example project demonstrating how to embed v8 in an Android application through the Android NDK.
 
-The applicationcode itself is a continuation of [marakana's intro to Android NDK](http://marakana.com/s/post/1153/introduction_to_ndk) tutorial series. The original code for that project can be found [here](https://github.com/marakana/FibonacciNative).
+The application code itself is a continuation of [marakana's intro to Android NDK](http://marakana.com/s/post/1153/introduction_to_ndk) tutorial series. The original code for that project can be found [here](https://github.com/marakana/FibonacciNative).
 
 ## Requirements
 
