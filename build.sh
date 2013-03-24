@@ -14,15 +14,51 @@ Options:
   -t <toolchain_dir>  The path to the Android's toolchain binaries. (default \$ANDROID_TOOLCHAIN)
   -p <platform>       The Android SDK version to support (default android-8)
   -j <num-cpus>       The number of processors to use in building (default 1)
+  -i                  Install resulting APK onto default device.
+  -d                  Install resulting APK and begin debugging via `ndk-gdb`. (-i not needed)
 EOF
 }
 
+red='\E[31;1m'
+green='\E[32;3m'
+
+function msg() {
+    echo -n -e "$green"
+    echo -n \-\>\  
+    tput sgr0
+    echo $@ >&1
+}
+
+function error() {
+    echo -n -e "$red"
+    echo -n \-\> ERROR:\  
+    tput sgr0
+    echo $@ >&2
+}
+
+function checkForErrors() {
+    ret=$?
+    if [ $ret -ne 0 ]
+    then
+        if [ -n "$1" ]
+        then
+            error "$@"
+        else
+            error "Unexpected error. Aborting."
+        fi
+        exit $ret
+    fi
+}
+
+NAME=Vatedroid
 NUM_CPUS=1
 PLATFORM_VERSION=android-8
 ANT_TARGET=debug
 V8_TARGET=android_arm.release
+INSTALL=false
+DEBUG=false
 
-while getopts "hs:v:n:t:p:j:" OPTION; do
+while getopts "hs:v:n:t:p:j:id" OPTION; do
   case $OPTION in
     h)
       usage
@@ -46,6 +82,12 @@ while getopts "hs:v:n:t:p:j:" OPTION; do
     p)
       PLATFORM_VERSION=$OPTARG
       ;;
+    i)
+      INSTALL=true
+      ;;
+    d)
+      DEBUG=true
+      ;;
     ?)
       usage
       exit
@@ -55,41 +97,69 @@ done
 
 if [[ -z "$V8_SRC_ROOT" ]]
 then
-  echo Please set \$V8_SRC_ROOT or use the -s option.
+  msg Please set \$V8_SRC_ROOT or use the -s option.
   usage
   exit
 fi
 
 if [[ -z "$ANDROID_NDK_ROOT" ]]
 then
-  echo Please set \$ANDROID_NDK_ROOT or use the -n option.
+  msg Please set \$ANDROID_NDK_ROOT or use the -n option.
   usage
   exit
 fi
 
 if [[ -z "$ANDROID_TOOLCHAIN" ]]
 then
-  echo Please set \$ANDROID_TOOLCHAIN or use the -t option.
+  msg Please set \$ANDROID_TOOLCHAIN or use the -t option.
   usage
   exit
 fi
 
-echo Updating/creating android project files...
+msg Updating/creating android project files...
 android update project --target $PLATFORM_VERSION --path .
+checkForErrors
 
-echo Building v8 for android target...
+msg Building v8 for android target...
 pushd $V8_SRC_ROOT
 make $V8_TARGET -j$NUM_CPUS
+checkForErrors
 popd
 
-echo Copying static library files... 
+msg Copying static library files... 
 rsync -tr $V8_SRC_ROOT/out/$V8_TARGET/obj.target/tools/gyp/*.a libs/.
+checkForErrors
 
-echo Copying v8 header files...
+msg Copying v8 header files...
 rsync -tr $V8_SRC_ROOT/include/* include/.
+checkForErrors
 
-echo Building NDK libraries...
+msg Building NDK libraries...
 NDK_DEBUG=1 $ANDROID_NDK_ROOT/ndk-build -j$NUM_CPUS
+checkForErrors "Problem building JNI module."
 
-echo Building $ANT_TARGET APK...
+msg Building $ANT_TARGET APK...
 ant $ANT_TARGET
+checkForErrors "Problem building APK."
+
+if $INSTALL || $DEBUG
+then
+  if [[ $ANT_TARGET == "debug" ]]
+  then
+    APK_FILE=bin/$NAME-debug.apk
+  else
+    APK_FILE=bin/$NAME.apk
+  fi
+  msg Installing $APK_FILE to device...
+  adb install -r $APK_FILE
+fi
+
+if $DEBUG
+then
+  msg Starting ndk-gdb...
+
+  # HACK? We seem to need to wait, otherwise we get some sort of disconnection.
+  sleep 3
+  
+  ndk-gdb --force --start
+fi
