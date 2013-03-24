@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -28,15 +27,6 @@ public class Vatedroid extends Activity implements OnClickListener {
     Button button = (Button) super.findViewById(R.id.button);
     button.setOnClickListener(this);
   }
-
-  /*
-  @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.fibonacci, menu);
-    return true;
-  }
-  */
 
   @Override
   public void onClick(View view) {
@@ -68,6 +58,12 @@ public class Vatedroid extends Activity implements OnClickListener {
           break;
         case R.id.type_fib_ni:
           result = FibLib.fibNI(n);
+          break;
+        case R.id.type_fib_jsr:
+          result = FibLib.fibJSR(n);
+          break;
+        case R.id.type_fib_jsi:
+          result = FibLib.fibJSI(n);
           break;
         }
         

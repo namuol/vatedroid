@@ -9,6 +9,7 @@ This script builds v8 against the Android NDK and a sample project skeleton that
 Options:
   -h                  Show this help message and exit
   -s <v8_src>         The path to v8's project sourcetree's root. (default \$V8_SRC_ROOT)
+  -v <v8_target>      Build target for v8. (default android_arm.release)
   -n <ndk_dir>        The path to the Android NDK. (default \$ANDROID_NDK_ROOT)
   -t <toolchain_dir>  The path to the Android's toolchain binaries. (default \$ANDROID_TOOLCHAIN)
   -p <platform>       The Android SDK version to support (default android-8)
@@ -19,8 +20,9 @@ EOF
 NUM_CPUS=1
 PLATFORM_VERSION=android-8
 ANT_TARGET=debug
+V8_TARGET=android_arm.release
 
-while getopts "hs:n:t:p:j:" OPTION; do
+while getopts "hs:v:n:t:p:j:" OPTION; do
   case $OPTION in
     h)
       usage
@@ -28,6 +30,9 @@ while getopts "hs:n:t:p:j:" OPTION; do
       ;;
     s)
       V8_SRC_ROOT=$OPTARG
+      ;;
+    v)
+      V8_TARGET=$OPTARG
       ;;
     n)
       ANDROID_NDK_ROOT=$OPTARG
@@ -74,17 +79,17 @@ android update project --target $PLATFORM_VERSION --path .
 
 echo Building v8 for android target...
 pushd $V8_SRC_ROOT
-make android_arm.release -j$NUM_CPUS
+make $V8_TARGET -j$NUM_CPUS
 popd
 
 echo Copying static library files... 
-cp $V8_SRC_ROOT/out/android_arm.release/obj.target/tools/gyp/*.a libs/.
+rsync -tr $V8_SRC_ROOT/out/$V8_TARGET/obj.target/tools/gyp/*.a libs/.
 
 echo Copying v8 header files...
-cp $V8_SRC_ROOT/include/* include/.
+rsync -tr $V8_SRC_ROOT/include/* include/.
 
 echo Building NDK libraries...
-$ANDROID_NDK_ROOT/ndk-build -j$NUM_CPUS
+NDK_DEBUG=1 $ANDROID_NDK_ROOT/ndk-build -j$NUM_CPUS
 
 echo Building $ANT_TARGET APK...
 ant $ANT_TARGET

@@ -21,6 +21,10 @@ public class FibLib {
   public native static long fibNR(long n);
   
   public native static long fibNI(long n);
+
+  public native static long fibJSR(long n);
+  
+  public native static long fibJSI(long n);
   
   static {
     System.loadLibrary("vatewrap");

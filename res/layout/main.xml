@@ -57,6 +57,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/fibNI" />
+
+        <RadioButton
+            android:id="@+id/type_fib_jsr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fibJSR" />
+
+        <RadioButton
+            android:id="@+id/type_fib_jsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/fibJSI" />
     </RadioGroup>
 
     <!-- This button allows the user to trigger fibonacci calculation  -->

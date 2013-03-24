@@ -6,6 +6,8 @@
     <string name="fibJI">fibJI</string>
     <string name="fibNR">fibNR</string>
     <string name="fibNI">fibNI</string>
+    <string name="fibJSR">fibJSR</string>
+    <string name="fibJSI">fibJSI</string>
     <string name="app_name">Vatedroid</string>
     <string name="button">Get Fibonacci Result</string>
 

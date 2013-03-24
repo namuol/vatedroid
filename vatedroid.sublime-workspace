@@ -1,0 +1,986 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Hand",
+				"HandleScope"
+			],
+			[
+				"hand",
+				"handle_scope"
+			],
+			[
+				"V",
+				"Vatedroid"
+			],
+			[
+				"grunt",
+				"grunt-contrib-coffee"
+			],
+			[
+				"game",
+				"gameOverText"
+			],
+			[
+				"_setPix",
+				"_setPixelNoScale"
+			],
+			[
+				"fra",
+				"frameLength"
+			],
+			[
+				"ha",
+				"handlers"
+			],
+			[
+				"cl",
+				"class"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/User/Coffeecake.sublime-build",
+	"command_palette":
+	{
+		"height": 117.0,
+		"selected_items":
+		[
+			[
+				"user",
+				"Preferences: Settings - User"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"adb",
+				"ADB: Launch"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"makefile",
+				"Set Syntax: Makefile"
+			],
+			[
+				"project",
+				"Project: Save As"
+			],
+			[
+				"yml",
+				"Set Syntax: YAML"
+			],
+			[
+				"cofe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"prefuse",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"javascr",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"synjavasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"keyb",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"keybind",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"setjavasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"setcoff",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"syncoffe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"pref",
+				"Preferences: Settings - Default"
+			],
+			[
+				"converto",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"mono",
+				"Schemr: Monokai"
+			],
+			[
+				"schemmi",
+				"Schemr: Monokai Bright"
+			],
+			[
+				"schmir",
+				"Schemr: MirodarkHighContrast"
+			],
+			[
+				"sch",
+				"Schemr: Solarized (Dark)"
+			],
+			[
+				"sche",
+				"Schemr: Boron"
+			],
+			[
+				"settings",
+				"Preferences: Settings - User"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade/Overwrite All Packages"
+			],
+			[
+				"coffeesc",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"mon",
+				"Schemr: Monokai Bright"
+			],
+			[
+				"lara",
+				"Schemr: Laravel"
+			],
+			[
+				"dark",
+				"Schemr: LaravelDarker"
+			],
+			[
+				"dar",
+				"Schemr: dark-pastel"
+			],
+			[
+				"coff",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"cof",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"coffe",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"coffee",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"setting us",
+				"Preferences: Settings - User"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"darks",
+				"Schemr: Darkside"
+			],
+			[
+				"carbon",
+				"Schemr: Carbonight"
+			],
+			[
+				"yule",
+				"Schemr: Yule"
+			],
+			[
+				"tronl",
+				"Schemr: TronLegacy"
+			],
+			[
+				"tron",
+				"Schemr: Tron"
+			],
+			[
+				"lastn",
+				"Schemr: LastNight"
+			],
+			[
+				"laravel",
+				"Schemr: LaravelDarker"
+			],
+			[
+				"sc dark",
+				"Schemr: Darkside"
+			],
+			[
+				"sc rel",
+				"Schemr: Reload schemes"
+			],
+			[
+				"cm mono",
+				"Schemr: Monokai"
+			],
+			[
+				"scco",
+				"Schemr: Cobalt"
+			],
+			[
+				"color",
+				"ColorSchemeSelector: Select Color Scheme"
+			],
+			[
+				"col",
+				"ColorSchemeSelector: Select Color Scheme"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"co",
+				"ColorSchemeSelector: Select Color Scheme"
+			],
+			[
+				"coffes",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				":4",
+				"Set Syntax: camlp4"
+			],
+			[
+				"java",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"brow",
+				"Preferences: Browse Packages"
+			],
+			[
+				"brows",
+				"Preferences: Browse Packages"
+			],
+			[
+				":$",
+				":$ - EOF"
+			],
+			[
+				"TASK",
+				"Set Syntax: Tasks"
+			],
+			[
+				"tasks",
+				"Set Syntax: Tasks"
+			],
+			[
+				"task",
+				"Tasks: Open URL"
+			],
+			[
+				"tasknew",
+				"Tasks: New document"
+			],
+			[
+				"public",
+				"Gist: Create Public Gist"
+			],
+			[
+				"bind",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"lor",
+				"Snippet: Lorem ipsum"
+			],
+			[
+				"snipp",
+				"Snippet: html"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"packa",
+				"Package Control: Discover Packages"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"package inst",
+				"Package Control: Install Package"
+			],
+			[
+				"tabs",
+				"View: Toggle Tabs"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"coffesc",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"tab",
+				"View: Toggle Tabs"
+			],
+			[
+				"ss",
+				"Set Syntax: Java"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/louman/dev/vatedroid/src/com/vatedroid/FibLib.java",
+		"/home/louman/dev/vatedroid/src/com/vatedroid/Vatedroid.java",
+		"/home/louman/dev/vatedroid/res/values/strings.xml",
+		"/home/louman/dev/vatedroid/res/layout/main.xml",
+		"/home/louman/dev/vatedroid/jni/Android.mk",
+		"/home/louman/dev/vatedroid/src/com/vatedroid/Fibonacci.java",
+		"/home/louman/dev/vatedroid/jni/com_jovianware_fibonaccinative_FibLib.c",
+		"/home/louman/dev/FibonacciNative/src/com/jovianware/fibonaccinative/Fibonacci.java",
+		"/home/louman/dev/vatedroid/AndroidManifest.xml",
+		"/home/louman/dev/v8/hello_world.cpp",
+		"/home/louman/dev/fragl.js/fragl.js.sublime-project",
+		"/home/louman/dev/fragl.js/fragl.js.sublime-workspace",
+		"/home/louman/dev/fragl.js/Cakefile",
+		"/home/louman/dev/fragl.js/src/modules/android.coffee",
+		"/home/louman/dev/fragl.js/src/examples/basic/main.coffee",
+		"/home/louman/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/louman/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/louman/dev/planet140/planet140/src/com/beaklabs/planet140/Planet140.java",
+		"/home/louman/dev/planet140/build.xml",
+		"/home/louman/dev/fragl.js/src/examples/snake/index_prod.ccup",
+		"/home/louman/dev/fragl.js/src/examples/juggler/index_prod.ccup",
+		"/home/louman/dev/fragl.js/src/util.coffee",
+		"/home/louman/dev/fragl.js/src/modules/web.coffee",
+		"/home/louman/dev/fragl.js/src/examples/juggler/index.ccup",
+		"/home/louman/dev/fragl.js/src/examples/snake/main.coffee",
+		"/home/louman/dev/fragl.js/src/fragl.coffee",
+		"/home/louman/dev/fragl.js/src/examples/basic/player.coffee",
+		"/home/louman/dev/fragl.js/src/examples/juggler/main.coffee",
+		"/home/louman/dev/fragl.js/lib/examples/juggler/index_prod.html",
+		"/home/louman/workspace/FibonacciNative/jni/Application.mk",
+		"/home/louman/workspace/FibonacciNative/jni/Android.mk",
+		"/home/louman/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/louman/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/louman/workspace/FibonacciNative/jni/com_jovianware_fibonaccinative_FibLib.c",
+		"/home/louman/workspace/FibonacciNative/jni/com_jovianware_fibonaccinative_FibLib.h",
+		"/home/louman/dev/fragl.js/src/examples/ui/main.coffee",
+		"/home/louman/dev/fragl.js/src/modules/ui.coffee",
+		"/home/louman/.config/sublime-text-2/Packages/User/ASCII Decorator.sublime-settings",
+		"/home/louman/.config/sublime-text-2/Packages/ASCII Decorator/ASCII Decorator.sublime-settings",
+		"/home/louman/.config/sublime-text-2/Packages/User/Package Control.sublime-settings",
+		"/home/louman/dev/fragl.js/src/Android/GdxRhino/fragl-gdx-rhino-android/res/values/strings.xml",
+		"/home/louman/dev/fragl.js/src/modules/tile.coffee",
+		"/home/louman/dev/fragl.js/src/examples/isometric/main.coffee",
+		"/home/louman/dev/fragl.js/src/modules/isometric.coffee",
+		"/home/louman/dev/fragl.js/src/index.ccup",
+		"/etc/mpd.conf",
+		"/home/louman/dev/fragl.js/src/examples/snake/index.ccup",
+		"/home/louman/dev/fragl.js/src/Android/GdxRhino/fragl-gdx-rhino-android/assets/data/build.sh",
+		"/home/louman/dev/fragl.js/lib/modules/web.js",
+		"/home/louman/.config/sublime-text-2/Packages/CoffeeScript/CoffeeScript.sublime-build",
+		"/home/louman/.config/sublime-text-2/Packages/User/Coffeecake.sublime-build",
+		"/home/louman/$HOME",
+		"/home/louman/.bashrc",
+		"/home/louman/.gmrunrc",
+		"/home/louman/.config/bashrun2/bashrun2.rc",
+		"/home/louman/.bash_aliases",
+		"/home/louman/dev/fragl.js/src/modules/test/okay.coffee",
+		"/home/louman/.TODO",
+		"/home/louman/.config/sublime-text-2/Packages/Gist/Gist.sublime-settings",
+		"/home/louman/dev/fragl.js/src/Android/GdxRhino/fragl-gdx-rhino/src/com/fragljs/TextureData.java",
+		"/home/louman/dev/fragl.js/ROADMAP.md",
+		"/tmp/test.js",
+		"/home/louman/dev/fragl.js/src/examples/snake/fragl.coffee",
+		"/home/louman/.config/sublime-text-2/Packages/CoffeeScript/CoffeeScript.sublime-commands",
+		"/home/louman/.config/sublime-text-2/Packages/User/Default (Windows).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"fibNR",
+			"fibJSI",
+			"AsciiValue",
+			"fibN",
+			"fibNI",
+			"},\n",
+			"Fibonacci",
+			"getCheckedRadioButtonId",
+			"R.layout",
+			"_updateTexture",
+			"cp -r",
+			"cp",
+			"registerMultiTask",
+			"f",
+			"build_dir",
+			"lib",
+			"'",
+			"r.js",
+			"./planet140/",
+			"gameOver",
+			"@bounces*@bounces",
+			"Paddle",
+			"Click to",
+			"gameNotStarted",
+			"reset",
+			"removeBall",
+			"play",
+			"gameOver",
+			"mediumBounce",
+			"removeBall",
+			"MIN_BALLS",
+			"removeBall",
+			"dead",
+			"removeBall",
+			"NUMBER OF",
+			"newBall",
+			"balls.length",
+			"app.balls",
+			"MIN_BALLS",
+			"LMB",
+			"gameIsOver",
+			"badBalls",
+			"bounceSpawnCount",
+			"MAX_BALLS",
+			"@alpha",
+			"omnom",
+			"font",
+			"newBall",
+			"NEW_STUFF_INTERVAL",
+			"die",
+			"kill",
+			"gravityRate",
+			"gravity",
+			"FRAGL",
+			"MyApp",
+			"APPLE_PROB",
+			"Apple",
+			": ",
+			"apple",
+			"MAX_APPLES",
+			"badApples",
+			"removeApple",
+			"newApple",
+			"mouse",
+			"apples",
+			"HasPhysics",
+			"grav",
+			"long",
+			"drawArrays",
+			".textures",
+			"@textures",
+			"texScale",
+			"texScake",
+			"texScale",
+			"texCount",
+			"@_texNum",
+			"@texNum",
+			".texNum",
+			"._texNum",
+			"_texNum",
+			"texNum",
+			"a_texNum",
+			"texNum",
+			"glTex",
+			"_updateTexture",
+			"_updateText",
+			"@glTex",
+			"renderbuffer",
+			"framebuffer",
+			"#",
+			"1",
+			"ctx.width",
+			"getImageData",
+			"FRAGL",
+			"width",
+			"img",
+			"beginEdit",
+			"Texture",
+			"widthOf",
+			"scale",
+			"preRender",
+			"drawTargetType",
+			"preRenderSheet",
+			"drawTargetType",
+			"\n    ",
+			"TextureGrid",
+			"gravityRate",
+			"drawFra",
+			"drawFrame",
+			"sheet",
+			"scale",
+			"Texture",
+			"TextureGrid",
+			"TileMap",
+			"texGrid",
+			"TextureGrid",
+			"@",
+			"e",
+			"clear",
+			"CanvasDrawTarget",
+			"App",
+			"f.",
+			"x",
+			"*@tex.scale",
+			"@tex.scale",
+			"*@tex.scale",
+			"Animation",
+			"sheet.anim"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 207.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"applica",
+				"jni/Application.mk"
+			],
+			[
+				"build.sh",
+				"build.sh"
+			],
+			[
+				"manif",
+				"AndroidManifest.xml"
+			],
+			[
+				"androidm",
+				"AndroidManifest.xml"
+			],
+			[
+				"vate",
+				"src/com/vatedroid/Vatedroid.java"
+			],
+			[
+				"strings",
+				"res/values/strings.xml"
+			],
+			[
+				"layout",
+				"res/layout/main.xml"
+			],
+			[
+				"vatewra",
+				"jni/vatewrap.cpp"
+			],
+			[
+				"fibl",
+				"src/com/vatedroid/FibLib.java"
+			],
+			[
+				"fiblib",
+				"src/com/vatedroid/FibLib.java"
+			],
+			[
+				"vatedr",
+				"src/com/vatedroid/Vatedroid.java"
+			],
+			[
+				"com",
+				"jni/com_jovianware_fibonaccinative_FibLib.c"
+			],
+			[
+				"fibon",
+				"src/com/vatedroid/Fibonacci.java"
+			],
+			[
+				"fibli",
+				"src/com/vatedroid/FibLib.java"
+			],
+			[
+				"vatedroid.ja",
+				"src/com/vatedroid/Vatedroid.java"
+			],
+			[
+				"android",
+				"jni/Android.mk"
+			],
+			[
+				"jni",
+				"jni/vatewrap.cpp"
+			],
+			[
+				"basic",
+				"src/examples/basic/main.coffee"
+			],
+			[
+				"webgl",
+				"src/modules/webgl.coffee"
+			],
+			[
+				"tile",
+				"src/modules/tile.coffee"
+			],
+			[
+				"cakef",
+				"Cakefile"
+			],
+			[
+				"subl",
+				"fragl.js.sublime-project"
+			],
+			[
+				"projec",
+				"fragl.js.sublime-project"
+			],
+			[
+				"grunt",
+				"Gruntfile.coffee"
+			],
+			[
+				"rea",
+				"README.md"
+			],
+			[
+				"basima",
+				"src/examples/basic/main.coffee"
+			],
+			[
+				"sublime-",
+				"fragl.js.sublime-project"
+			],
+			[
+				"sublim-pr",
+				"fragl.js.sublime-project"
+			],
+			[
+				"index_pro",
+				"src/examples/snake/index_prod.ccup"
+			],
+			[
+				"jugind",
+				"src/examples/juggler/index.ccup"
+			],
+			[
+				"index_prod",
+				"src/examples/juggler/index_prod.ccup"
+			],
+			[
+				"index_pr",
+				"lib/examples/juggler/index_prod.html"
+			],
+			[
+				"util",
+				"src/util.coffee"
+			],
+			[
+				"web",
+				"src/modules/web.coffee"
+			],
+			[
+				"jugglerind",
+				"src/examples/juggler/index.ccup"
+			],
+			[
+				"snakema",
+				"src/examples/snake/main.coffee"
+			],
+			[
+				"fragl",
+				"src/fragl.coffee"
+			],
+			[
+				"player",
+				"src/examples/basic/player.coffee"
+			],
+			[
+				"basicpla",
+				"src/examples/basic/player.coffee"
+			],
+			[
+				"basicmain",
+				"src/examples/basic/main.coffee"
+			],
+			[
+				"jugglermain",
+				"src/examples/juggler/main.coffee"
+			],
+			[
+				"andr",
+				"Android.mk"
+			],
+			[
+				"",
+				"com_jovianware_fibonaccinative_FibLib.h"
+			],
+			[
+				"uimain",
+				"src/examples/ui/main.coffee"
+			],
+			[
+				"ui.c",
+				"src/modules/ui.coffee"
+			],
+			[
+				"inst",
+				"src/Android/GdxRhino/fragl-gdx-rhino-android/res/values/strings.xml"
+			],
+			[
+				"uima",
+				"src/examples/ui/main.coffee"
+			],
+			[
+				"frag",
+				"src/fragl.coffee"
+			],
+			[
+				"isomain",
+				"src/examples/isometric/main.coffee"
+			],
+			[
+				"snama",
+				"src/examples/snake/main.coffee"
+			],
+			[
+				"basma",
+				"src/examples/basic/main.coffee"
+			],
+			[
+				"snakma",
+				"src/examples/snake/main.coffee"
+			],
+			[
+				"index.ccup",
+				"src/index.ccup"
+			],
+			[
+				"fra",
+				"src/fragl.coffee"
+			],
+			[
+				"fragl.c",
+				"src/fragl.coffee"
+			],
+			[
+				"uimainc",
+				"src/examples/ui/main.coffee"
+			],
+			[
+				"basicmainc",
+				"src/examples/basic/main.coffee"
+			],
+			[
+				"basicplayer",
+				"src/examples/basic/player.coffee"
+			],
+			[
+				"isomaincof",
+				"src/examples/isometric/main.coffee"
+			],
+			[
+				"cak",
+				"Cakefile"
+			],
+			[
+				"web.c",
+				"src/modules/web.coffee"
+			],
+			[
+				"main",
+				"src/examples/snake/main.coffee"
+			],
+			[
+				"webco",
+				"src/modules/web.coffee"
+			],
+			[
+				"index_",
+				"src/examples/snake/index_prod.ccup"
+			],
+			[
+				"snaind",
+				"src/examples/snake/index.ccup"
+			],
+			[
+				"main.coffee",
+				"src/examples/snake/main.coffee"
+			],
+			[
+				"tex",
+				"src/Android/GdxRhino/fragl-gdx-rhino/src/com/fragljs/TextureData.java"
+			],
+			[
+				"textured",
+				"src/Android/GdxRhino/fragl-gdx-rhino/src/com/fragljs/TextureData.java"
+			],
+			[
+				"andrtext",
+				"src/Android/GdxRhino/fragl-gdx-rhino/src/com/fragljs/TextureData.java"
+			],
+			[
+				"android.coffe",
+				"src/modules/android.coffee"
+			],
+			[
+				"src/ind",
+				"src/index.ccup"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 190.0,
+	"status_bar_visible": true
+}
