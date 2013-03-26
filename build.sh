@@ -15,7 +15,7 @@ Options:
   -p <platform>       The Android SDK version to support (default android-8)
   -j <num-cpus>       The number of processors to use in building (default 1)
   -i                  Install resulting APK onto default device.
-  -d                  Install resulting APK and begin debugging via `ndk-gdb`. (-i not needed)
+  -d                  Install resulting APK and begin debugging via ndk-gdb. (-i not needed)
 EOF
 }
 
@@ -161,5 +161,5 @@ then
   # HACK? We seem to need to wait, otherwise we get some sort of disconnection.
   sleep 3
   
-  ndk-gdb --force --start
+  $ANDROID_NDK_ROOT/ndk-gdb --verbose --force --start
 fi
