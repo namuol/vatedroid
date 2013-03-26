@@ -37,6 +37,8 @@ static jlong fibNI (
 }
 
 class V8Runner {
+  Isolate* isolate;
+
   Handle<Context> context;
   
   Handle<Value> runJS(std::string js) {
@@ -56,7 +58,10 @@ class V8Runner {
 
   public:
   V8Runner() {
-    Locker l;
+    isolate = Isolate::New();
+    Locker l(isolate);
+    Isolate::Scope isolateScope(isolate);
+
     HandleScope handle_scope;
 
     context = Persistent<Context>(Context::New());
@@ -95,7 +100,9 @@ class V8Runner {
   }
 
   jlong fibJSR (jlong n) {
-    Locker l;
+    Locker l(isolate);
+    Isolate::Scope isolateScope(isolate);
+    
     HandleScope handle_scope;
 
     std::stringstream ss;
@@ -105,7 +112,9 @@ class V8Runner {
   }
 
   jlong fibJSI (jlong n) {
-    Locker l;
+    Locker l(isolate);
+    Isolate::Scope isolateScope(isolate);
+
     HandleScope handle_scope;
 
     std::stringstream ss;
