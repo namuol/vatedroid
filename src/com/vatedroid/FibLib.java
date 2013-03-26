@@ -27,6 +27,7 @@ public class FibLib {
   public native static long fibJSI(long n);
   
   static {
+    System.loadLibrary("gnustl_shared");
     System.loadLibrary("vatewrap");
   }
 }
