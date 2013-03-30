@@ -1,5 +1,6 @@
 #include <string>
 #include <sstream>
+#include <vector>
 
 #include <jni.h>
 #include <android/log.h>
@@ -41,21 +42,6 @@ class V8Runner {
 
   Handle<Context> context;
   
-  Handle<Value> runJS(std::string js) {
-    Context::Scope context_scope(context);
-
-    // Create a string containing the JavaScript source code.
-    Handle<String> source = String::New(js.c_str());
-
-    // Compile the source code.
-    Handle<Script> script = Script::Compile(source);
-    
-    // Run the script to get the result.
-    Handle<Value> result = script->Run();
-    
-    return result;
-  }
-
   public:
   V8Runner() {
     isolate = Isolate::New();
@@ -99,54 +85,111 @@ class V8Runner {
     Script::Compile(source)->Run();
   }
 
-  jlong fibJSR (jlong n) {
+  Handle<Value> runJS(std::string js) {
     Locker l(isolate);
     Isolate::Scope isolateScope(isolate);
+
+    HandleScope handle_scope;
+
+    Context::Scope context_scope(context);
+
+    // Create a string containing the JavaScript source code.
+    Handle<String> source = String::New(js.c_str());
+
+    // Compile the source code.
+    Handle<Script> script = Script::Compile(source);
     
-    HandleScope handle_scope;
-
-    std::stringstream ss;
-    ss << "fibJSR(" << n << ");";
-    Handle<Value> result = runJS(ss.str());
-    return result->NumberValue();
-  }
-
-  jlong fibJSI (jlong n) {
-    Locker l(isolate);
-    Isolate::Scope isolateScope(isolate);
-
-    HandleScope handle_scope;
-
-    std::stringstream ss;
-    ss << "fibJSI(" << n << ");";
-    Handle<Value> result = runJS(ss.str());
-    return result->NumberValue();
+    // Run the script to get the result.
+    Handle<Value> result = script->Run();
+    
+    return result;
   }
 };
 
-static V8Runner* runner;
+static std::vector<int> freeSlots;
+static std::vector<V8Runner*> runners;
 
-static jlong fibJSR (
-  JNIEnv *env,
-  jclass klass,
-  jlong n
-) {
-  return runner->fibJSR(n);
+static Handle<Value> runJS (jlong index, std::string js) {
+  if (index < 0 || index >= runners.size()) {
+    return Handle<Value>();
+  }
+
+  V8Runner* r = runners[index];
+  
+  if (r == NULL) {
+    return Handle<Value>();
+  }
+
+  return r->runJS(js);
 }
 
-static jlong fibJSI (
+static void runJS_void (
   JNIEnv *env,
   jclass klass,
-  jlong n
+  jlong index,
+  jstring jstr
 ) {
-  return runner->fibJSI(n);
+  const char* cstr = env->GetStringUTFChars(jstr, NULL);
+  std::string js(cstr);
+  runJS(index, js);
+  env->ReleaseStringUTFChars(jstr, cstr);
+}
+
+static jdouble runJS_number (
+  JNIEnv *env,
+  jclass klass,
+  jlong index,
+  jstring jstr
+) {
+  const char* cstr = env->GetStringUTFChars(jstr, NULL);
+  std::string js(cstr);
+  jdouble result = runJS(index, js)->NumberValue();
+  env->ReleaseStringUTFChars(jstr, cstr);
+  return result;
+}
+
+static jlong createRunner (
+  JNIEnv *env,
+  jclass klass
+) {
+  int index;
+  if (false && freeSlots.size() > 0) {
+    index = freeSlots[freeSlots.size()-1];
+    freeSlots.pop_back();
+  } else {
+    runners.push_back(NULL);
+    index = runners.size()-1;
+  }
+  runners[index] = new V8Runner();
+  return index;
+}
+
+static void destroyRunner (
+  JNIEnv *env,
+  jclass klass,
+  jlong index
+) {
+  if (index < 0 || index >= runners.size()) {
+    return;
+  }
+
+  V8Runner* r = runners[index];
+  
+  if (r == NULL) {
+    return;
+  }
+
+  delete r;
+  runners[index] = NULL;
+
+  freeSlots.push_back(index);
 }
 
 static JNINativeMethod method_table[] = {
-  {"fibNR", "(J)J", (void *) fibNR},
-  {"fibNI", "(J)J", (void *) fibNI},
-  {"fibJSR", "(J)J", (void *) fibJSR},
-  {"fibJSI", "(J)J", (void *) fibJSI}
+  {"createRunner", "()J", (void *) createRunner},
+  {"destroyRunner", "(J)V", (void *) destroyRunner},
+  {"runJS_void", "(JLjava/lang/String;)V", (void *) runJS_void},
+  {"runJS_number", "(JLjava/lang/String;)D", (void *) runJS_number}
 };
 
 // We need to tell the JNI environment to find our method names and properly
@@ -162,13 +205,11 @@ jint JNI_OnLoad (
     return -1;
   }
 
-  jclass klass = env->FindClass("com/vatedroid/FibLib");
+  jclass klass = env->FindClass("com/vatedroid/V8Runner");
   
   if (!klass) {
     return -1;
   }
-
-  runner = new V8Runner();
 
   env->RegisterNatives(
     klass,

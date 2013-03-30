@@ -2,6 +2,7 @@ package com.vatedroid;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.text.TextUtils;
@@ -26,8 +27,16 @@ public class Vatedroid extends Activity implements OnClickListener {
     this.output = (TextView) super.findViewById(R.id.output);
     Button button = (Button) super.findViewById(R.id.button);
     button.setOnClickListener(this);
+    
+    FibLib.init();
   }
-
+  
+  @Override
+  protected void onDestroy() {
+    FibLib.deinit();
+  }
+  
+  @SuppressLint("DefaultLocale")
   @Override
   public void onClick(View view) {
     String s = this.input.getText().toString();

@@ -4,16 +4,24 @@
 		"selected_items":
 		[
 			[
+				"V",
+				"V8Runner"
+			],
+			[
+				"fi",
+				"fibJSR"
+			],
+			[
+				"fib",
+				"fibJSI"
+			],
+			[
 				"Hand",
 				"HandleScope"
 			],
 			[
 				"hand",
 				"handle_scope"
-			],
-			[
-				"V",
-				"Vatedroid"
 			],
 			[
 				"grunt",
@@ -43,13 +51,73 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "jni/vatewrap.cpp",
+			"settings":
+			{
+				"buffer_size": 3522,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "function fib (n) {\n  return n <= 0 ? 0 : n == 1 ? 1 : fib(n - 1) + fib(n -2);\n}\n\nfunction fibJSR (n) {\n  return fib(n);\n}\n\nfunction fibJSI (n) {\n  var prev = -1,\n      result = 1,\n      i, sum;\n\n  for(i=0; i <= n; ++i) {\n    sum = result + prev;\n    prev = result;\n    result = sum;\n  }\n\n  return result;\n}",
+			"settings":
+			{
+				"buffer_size": 306,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "jni/Application.mk",
+			"settings":
+			{
+				"buffer_size": 24,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "build.sh",
+			"settings":
+			{
+				"buffer_size": 3338,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 883,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "jni/Android.mk",
+			"settings":
+			{
+				"buffer_size": 532,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "Packages/User/Coffeecake.sublime-build",
 	"command_palette":
 	{
-		"height": 117.0,
+		"height": 54.0,
 		"selected_items":
 		[
+			[
+				"makef",
+				"Set Syntax: Makefile"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
 			[
 				"user",
 				"Preferences: Settings - User"
@@ -201,10 +269,6 @@
 			[
 				"coff",
 				"Set Syntax: CoffeeScript"
-			],
-			[
-				"javasc",
-				"Set Syntax: JavaScript"
 			],
 			[
 				"bash",
@@ -371,10 +435,6 @@
 				"View: Toggle Tabs"
 			],
 			[
-				"spaces",
-				"Indentation: Convert to Spaces"
-			],
-			[
 				"coffesc",
 				"Set Syntax: CoffeeScript"
 			],
@@ -404,6 +464,7 @@
 	},
 	"file_history":
 	[
+		"/home/louman/dev/vatedroid/AndroidManifest.xml",
 		"/home/louman/dev/vatedroid/src/com/vatedroid/FibLib.java",
 		"/home/louman/dev/vatedroid/src/com/vatedroid/Vatedroid.java",
 		"/home/louman/dev/vatedroid/res/values/strings.xml",
@@ -412,7 +473,6 @@
 		"/home/louman/dev/vatedroid/src/com/vatedroid/Fibonacci.java",
 		"/home/louman/dev/vatedroid/jni/com_jovianware_fibonaccinative_FibLib.c",
 		"/home/louman/dev/FibonacciNative/src/com/jovianware/fibonaccinative/Fibonacci.java",
-		"/home/louman/dev/vatedroid/AndroidManifest.xml",
 		"/home/louman/dev/v8/hello_world.cpp",
 		"/home/louman/dev/fragl.js/fragl.js.sublime-project",
 		"/home/louman/dev/fragl.js/fragl.js.sublime-workspace",
@@ -487,6 +547,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"ndk-gdb",
+			"echo",
+			"1",
+			"LOGFILE",
+			"    function fib (jlong n) {\n      return n <= 0 ? 0 : n == 1 ? 1 : fib(n - 1) + fib(n -2);\n    }\n\n    function fibJSR (n) {\n      return fib(n);\n    }",
+			"itoa",
 			"fibNR",
 			"fibJSI",
 			"AsciiValue",
@@ -608,13 +674,7 @@
 			"clear",
 			"CanvasDrawTarget",
 			"App",
-			"f.",
-			"x",
-			"*@tex.scale",
-			"@tex.scale",
-			"*@tex.scale",
-			"Animation",
-			"sheet.anim"
+			"f."
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -632,8 +692,170 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "jni/vatewrap.cpp",
+					"settings":
+					{
+						"buffer_size": 3522,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2077,
+								2077
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1363.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"settings":
+					{
+						"buffer_size": 306,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								306,
+								306
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "jni/Application.mk",
+					"settings":
+					{
+						"buffer_size": 24,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								24,
+								24
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "build.sh",
+					"settings":
+					{
+						"buffer_size": 3338,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1351,
+								1351
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 480.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "README.md",
+					"settings":
+					{
+						"buffer_size": 883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								159,
+								159
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "jni/Android.mk",
+					"settings":
+					{
+						"buffer_size": 532,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -682,6 +904,30 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"android.mk",
+				"jni/Android.mk"
+			],
+			[
+				"xml",
+				"AndroidManifest.xml"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"build",
+				"build.sh"
+			],
+			[
+				"applic",
+				"jni/Application.mk"
+			],
+			[
+				"vatewr",
+				"jni/vatewrap.cpp"
+			],
 			[
 				"applica",
 				"jni/Application.mk"
