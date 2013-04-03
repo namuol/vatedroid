@@ -11,24 +11,24 @@ public class V8Runner {
   private native static double runJS_number(long index, String src);
   private native static void runJS_void(long index, String src);
   
-  private long index = -1;
+  private long handle = -1;
 
   public V8Runner() {
-    index = createRunner();
+    handle = createRunner();
   }
   
   public double runJS_number(String js) {
-    return runJS_number(index, js);
+    return runJS_number(handle, js);
   }
   
   public void runJS_void(String js) {
-    runJS_void(index, js);
+    runJS_void(handle, js);
   }
   
   public void dispose() {
-    if (index >= 0) {
-      destroyRunner(index);
-      index = -1;
+    if (handle >= 0) {
+      destroyRunner(handle);
+      handle = -1;
     }
   }
 }

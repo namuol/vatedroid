@@ -9,3 +9,5 @@ local.properties
 .settings
 *.log
 *.sublime-workspace
+include/html/
+include/latex/

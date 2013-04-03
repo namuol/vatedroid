@@ -106,44 +106,29 @@ class V8Runner {
   }
 };
 
-static std::vector<int> freeSlots;
-static std::vector<V8Runner*> runners;
-
-static Handle<Value> runJS (jlong index, std::string js) {
-  if (index < 0 || index >= runners.size()) {
-    return Handle<Value>();
-  }
-
-  V8Runner* r = runners[index];
-  
-  if (r == NULL) {
-    return Handle<Value>();
-  }
-
-  return r->runJS(js);
-}
-
 static void runJS_void (
   JNIEnv *env,
   jclass klass,
-  jlong index,
+  jlong handle,
   jstring jstr
 ) {
   const char* cstr = env->GetStringUTFChars(jstr, NULL);
   std::string js(cstr);
-  runJS(index, js);
+  V8Runner* r = (V8Runner*) handle;
+  r->runJS(js);
   env->ReleaseStringUTFChars(jstr, cstr);
 }
 
 static jdouble runJS_number (
   JNIEnv *env,
   jclass klass,
-  jlong index,
+  jlong handle,
   jstring jstr
 ) {
   const char* cstr = env->GetStringUTFChars(jstr, NULL);
   std::string js(cstr);
-  jdouble result = runJS(index, js)->NumberValue();
+  V8Runner* r = (V8Runner*) handle;
+  jdouble result = r->runJS(js)->NumberValue();
   env->ReleaseStringUTFChars(jstr, cstr);
   return result;
 }
@@ -152,37 +137,16 @@ static jlong createRunner (
   JNIEnv *env,
   jclass klass
 ) {
-  int index;
-  if (false && freeSlots.size() > 0) {
-    index = freeSlots[freeSlots.size()-1];
-    freeSlots.pop_back();
-  } else {
-    runners.push_back(NULL);
-    index = runners.size()-1;
-  }
-  runners[index] = new V8Runner();
-  return index;
+  return (jlong) new V8Runner();
 }
 
 static void destroyRunner (
   JNIEnv *env,
   jclass klass,
-  jlong index
+  jlong handle
 ) {
-  if (index < 0 || index >= runners.size()) {
-    return;
-  }
-
-  V8Runner* r = runners[index];
-  
-  if (r == NULL) {
-    return;
-  }
-
+  V8Runner* r = (V8Runner*) handle;
   delete r;
-  runners[index] = NULL;
-
-  freeSlots.push_back(index);
 }
 
 static JNINativeMethod method_table[] = {
