@@ -7,28 +7,17 @@ public class V8Runner {
   }
   
   private native static long createRunner();
-  private native static void destroyRunner(long index);
-  private native static double runJS_number(long index, String src);
-  private native static void runJS_void(long index, String src);
+  public native void destroyRunner();
+  public native double runJS_number(String src);
+  public native void runJS_void(String src);
   
-  private long handle = -1;
+  private long handle;
 
   public V8Runner() {
     handle = createRunner();
   }
   
-  public double runJS_number(String js) {
-    return runJS_number(handle, js);
-  }
-  
-  public void runJS_void(String js) {
-    runJS_void(handle, js);
-  }
-  
-  public void dispose() {
-    if (handle >= 0) {
-      destroyRunner(handle);
-      handle = -1;
-    }
+  public void dispose() {  
+    destroyRunner();
   }
 }

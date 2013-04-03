@@ -8,35 +8,6 @@
 #include <v8.h>
 using namespace v8;
 
-static jlong fib (jlong n) {
-  return n <= 0 ? 0 : n == 1 ? 1 : fib(n - 1) + fib(n -2);
-}
-
-static jlong fibNR (
-  JNIEnv *env,
-  jclass klass,
-  jlong n
-) {
-  return fib(n);
-}
-
-static jlong fibNI (
-  JNIEnv *env,
-  jclass klass,
-  jlong n
-) {
-  jlong prev = -1;
-  jlong result = 1;
-  jlong i;
-  for(i=0; i <= n; ++i) {
-    jlong sum = result + prev;
-    prev = result;
-    result = sum;
-  }
-
-  return result;
-}
-
 class V8Runner {
   Isolate* isolate;
 
@@ -106,28 +77,28 @@ class V8Runner {
   }
 };
 
+static jfieldID handleField;
+
 static void runJS_void (
   JNIEnv *env,
-  jclass klass,
-  jlong handle,
+  jobject obj,
   jstring jstr
 ) {
   const char* cstr = env->GetStringUTFChars(jstr, NULL);
   std::string js(cstr);
-  V8Runner* r = (V8Runner*) handle;
+  V8Runner* r = (V8Runner*) env->GetLongField(obj, handleField);
   r->runJS(js);
   env->ReleaseStringUTFChars(jstr, cstr);
 }
 
 static jdouble runJS_number (
   JNIEnv *env,
-  jclass klass,
-  jlong handle,
+  jobject obj,
   jstring jstr
 ) {
   const char* cstr = env->GetStringUTFChars(jstr, NULL);
   std::string js(cstr);
-  V8Runner* r = (V8Runner*) handle;
+  V8Runner* r = (V8Runner*) env->GetLongField(obj, handleField);
   jdouble result = r->runJS(js)->NumberValue();
   env->ReleaseStringUTFChars(jstr, cstr);
   return result;
@@ -142,18 +113,18 @@ static jlong createRunner (
 
 static void destroyRunner (
   JNIEnv *env,
-  jclass klass,
+  jclass obj,
   jlong handle
 ) {
-  V8Runner* r = (V8Runner*) handle;
+  V8Runner* r = (V8Runner*) env->GetLongField(obj, handleField);
   delete r;
 }
 
 static JNINativeMethod method_table[] = {
   {"createRunner", "()J", (void *) createRunner},
-  {"destroyRunner", "(J)V", (void *) destroyRunner},
-  {"runJS_void", "(JLjava/lang/String;)V", (void *) runJS_void},
-  {"runJS_number", "(JLjava/lang/String;)D", (void *) runJS_number}
+  {"destroyRunner", "()V", (void *) destroyRunner},
+  {"runJS_void", "(Ljava/lang/String;)V", (void *) runJS_void},
+  {"runJS_number", "(Ljava/lang/String;)D", (void *) runJS_number}
 };
 
 // We need to tell the JNI environment to find our method names and properly
@@ -180,6 +151,11 @@ jint JNI_OnLoad (
     method_table,
     sizeof(method_table) / sizeof(method_table[0])
   );
+
+  // Store a reference to the handle field (a C++ V8Runner* pointer)
+  //  so we can quickly access it from the V8Runner java class without
+  //  a lookup.
+  handleField = env->GetFieldID(klass, "handle", "J");
 
   env->DeleteLocalRef(klass);
   return JNI_VERSION_1_6;
