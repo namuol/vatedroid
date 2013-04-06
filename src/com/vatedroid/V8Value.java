@@ -3,9 +3,9 @@ package com.vatedroid;
 public class V8Value {
   private long handle;
   
-  private native void init();
-  private native void init(String str);
-  private native void init(double num);
+  private native void init(V8Runner runner);
+  private native void init(V8Runner runner, String str);
+  private native void init(V8Runner runner, double num);
   
   private native boolean isUndefined();
   private native boolean isString();
@@ -14,7 +14,9 @@ public class V8Value {
   public native String asString();
   public native double asNumber();
   
-  public V8Value() { init(); }
-  public V8Value(String str) { init(str); }
-  public V8Value(double num) { init(num); }
+  private V8Value() {}
+  
+  public V8Value(V8Runner runner) { init(runner); }
+  public V8Value(V8Runner runner, String str) { init(runner, str); }
+  public V8Value(V8Runner runner, double num) { init(runner, num); }
 }

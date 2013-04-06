@@ -9,8 +9,8 @@ public class FibLib {
   public native static long fibNR(long n);
   public native static long fibNI(long n);
 
-  public static long fibJSR(long n) { return (long) v8.runJS_number("fibJSR(" + n + ");"); }
-  public static long fibJSI(long n) { return (long) v8.runJS_number("fibJSI(" + n + ");"); }
+  public static long fibJSR(long n) { return (long) v8.runJS("fibJSR(" + n + ");").asNumber(); }
+  public static long fibJSI(long n) { return (long) v8.runJS("fibJSI(" + n + ");").asNumber(); }
   
   private static V8Runner v8 = null;
   private static final String INITIAL_SOURCE = 
@@ -55,7 +55,7 @@ public class FibLib {
   
   public static void init () {
     v8 = new V8Runner();
-    v8.runJS_void(INITIAL_SOURCE);
+    v8.runJS(INITIAL_SOURCE);
   }
   
   public static void deinit() {

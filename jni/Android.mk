@@ -17,7 +17,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE    := vatewrap
-LOCAL_SRC_FILES := vatewrap.cpp
+LOCAL_SRC_FILES := vatewrap.cpp V8Runner.cpp V8Value.cpp
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../include
 LOCAL_STATIC_LIBRARIES := v8_base v8_nosnapshot
 include $(BUILD_SHARED_LIBRARY)
