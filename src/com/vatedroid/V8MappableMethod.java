@@ -1,5 +1,6 @@
 package com.vatedroid;
 
 public interface V8MappableMethod {
-  //V8ValueFactory run(V8ValueFactory[] arguments);
+  V8Runner getRunner();
+  V8Value methodToRun(V8Value[] args);
 }

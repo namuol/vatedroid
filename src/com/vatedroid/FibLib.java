@@ -1,5 +1,7 @@
 package com.vatedroid;
 
+import android.util.Log;
+
 public class FibLib {
   static {
     System.loadLibrary("gnustl_shared");
@@ -52,10 +54,27 @@ public class FibLib {
     
     return result;
   }
+
+  
+  static class TestMappableMethod implements V8MappableMethod {
+    @Override
+    public V8Value methodToRun(V8Value[] args) {
+      Log.e("methodToRun", "Hello from Java!");
+      Log.e("methodToRun", "Argument 0: " + args[0].asString());
+      return v8.val(0);
+    }
+
+    @Override
+    public V8Runner getRunner() {
+      return v8;
+    }
+  }
   
   public static void init () {
     v8 = new V8Runner();
+    v8.map(new FibLib.TestMappableMethod(), "sayHello");
     v8.runJS(INITIAL_SOURCE);
+    v8.runJS("sayHello(\"Testing\", 1, 2, 3);");
   }
   
   public static void deinit() {

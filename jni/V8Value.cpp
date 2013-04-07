@@ -1,3 +1,5 @@
+#include <jni.h>
+
 #include <v8.h>
 using namespace v8;
 
@@ -30,6 +32,10 @@ V8Value::V8Value (V8Runner* _runner, double num) {
 V8Value::V8Value (V8Runner* _runner, Handle<Value> _val) {
   V8_VALUE_INIT(_runner)
   val = Persistent<Value>::New(runner->isolate, _val);
+}
+
+V8Value::~V8Value () {
+  val.Dispose(runner->isolate);
 }
 
 Handle<Value> V8Value::getValue() {

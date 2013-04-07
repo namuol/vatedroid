@@ -5,15 +5,16 @@ public class V8Runner {
     System.loadLibrary("gnustl_shared");
     System.loadLibrary("vatewrap");
   }
-
-  public static class V8ValueFactory {
-    public V8ValueFactory(V8Runner context) {
-    }
+  
+  public V8Value val(String str) {
+    return new V8Value(this, str);
   }
   
-  private V8ValueFactory valFac;
+  public V8Value val(double num) {
+    return new V8Value(this, num);
+  }
   
-  private native long createRunner();
+  private native long create();
   public native void dispose();
   
   public native V8Value runJS(String src);
@@ -22,6 +23,6 @@ public class V8Runner {
   private long handle;
 
   public V8Runner() {
-    handle = createRunner();
+    handle = create();
   }
 }

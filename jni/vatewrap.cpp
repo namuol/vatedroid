@@ -5,53 +5,59 @@ using namespace v8;
 
 #include "V8Runner.h"
 #include "V8Value.h"
-
-static jfieldID valueHandle;
-static jmethodID value_init,
-                 value_init_str,
-                 value_init_num,
-                 value_init_internal;
-
-static jfieldID runnerHandle;
+#include "vatewrap.h"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // V8RUNNER CLASS
 //////////////////////////////////////////////////////////////////////////////////////////////
-static jobject runJS (
+static jobject V8Runner_runJS (
   JNIEnv *env,
   jobject jrunner,
   jstring jstr
 ) {
   const char* js = env->GetStringUTFChars(jstr, NULL);
-  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, runnerHandle);
+  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, f_V8Runner_handle);
   V8Value* result = new V8Value(runner, runner->runJS(js));
   jclass V8Value_class = env->FindClass("com/vatedroid/V8Value");
-  jobject wrappedResult = env->NewObject(V8Value_class, value_init_internal);
-  env->SetLongField(wrappedResult, valueHandle, (jlong) result);
+  jobject wrappedResult = env->NewObject(V8Value_class, m_V8Value_init_internal);
+  env->SetLongField(wrappedResult, f_V8Value_handle, (jlong) result);
 
   env->ReleaseStringUTFChars(jstr, js);
   return wrappedResult;
 }
 
-static jlong createRunner (
+static jlong V8Runner_create (
   JNIEnv *env,
   jclass klass
 ) {
   return (jlong) new V8Runner();
 }
 
-static void destroyRunner (
+static void V8Runner_destroy (
   JNIEnv *env,
   jclass obj
 ) {
-  V8Runner* r = (V8Runner*) env->GetLongField(obj, runnerHandle);
+  V8Runner* r = (V8Runner*) env->GetLongField(obj, f_V8Runner_handle);
   delete r;
 }
 
+static void V8Runner_map (
+  JNIEnv *env,
+  jobject jrunner,
+  jobject jmappableMethod,
+  jstring jname
+) {
+  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, f_V8Runner_handle);
+  const char* name = env->GetStringUTFChars(jname, NULL);
+  runner->mapMethod(env, jmappableMethod, name);
+  env->ReleaseStringUTFChars(jname, name);
+}
+
 static JNINativeMethod V8Runner_Methods[] = {
-  {"createRunner", "()J", (void *) createRunner},
-  {"dispose", "()V", (void *) destroyRunner},
-  {"runJS", "(Ljava/lang/String;)Lcom/vatedroid/V8Value;", (void *) runJS}
+  {"create", "()J", (void *) V8Runner_create},
+  {"dispose", "()V", (void *) V8Runner_destroy},
+  {"runJS", "(Ljava/lang/String;)Lcom/vatedroid/V8Value;", (void *) V8Runner_runJS},
+  {"map", "(Lcom/vatedroid/V8MappableMethod;Ljava/lang/String;)V", (void *) V8Runner_map},
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,8 +68,8 @@ static void V8Value_init_void (
   jobject obj,
   jobject jrunner
 ) {
-  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, runnerHandle);
-  env->SetLongField(obj, valueHandle, (jlong) new V8Value(runner));
+  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, f_V8Runner_handle);
+  env->SetLongField(obj, f_V8Value_handle, (jlong) new V8Value(runner));
 }
 
 static void V8Value_init_str (
@@ -72,9 +78,9 @@ static void V8Value_init_str (
   jobject jrunner,
   jstring jstr
 ) {
-  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, runnerHandle);
+  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, f_V8Runner_handle);
   const char* cstr = env->GetStringUTFChars(jstr, NULL);
-  env->SetLongField(obj, valueHandle, (jlong) new V8Value(runner, cstr)); 
+  env->SetLongField(obj, f_V8Value_handle, (jlong) new V8Value(runner, cstr)); 
   env->ReleaseStringUTFChars(jstr, cstr);
 }
 
@@ -84,15 +90,15 @@ static void V8Value_init_num (
   jobject jrunner,
   jdouble num
 ) {
-  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, runnerHandle);
-  env->SetLongField(obj, valueHandle, (jlong) new V8Value(runner, num)); 
+  V8Runner* runner = (V8Runner*) env->GetLongField(jrunner, f_V8Runner_handle);
+  env->SetLongField(obj, f_V8Value_handle, (jlong) new V8Value(runner, num)); 
 }
 
 static jstring V8Value_asString (
   JNIEnv *env,
   jobject obj
 ) {
-  V8Value* val = (V8Value*) env->GetLongField(obj, valueHandle);
+  V8Value* val = (V8Value*) env->GetLongField(obj, f_V8Value_handle);
   return env->NewStringUTF(*String::Utf8Value(val->getValue()->ToString()));
 }
 
@@ -100,8 +106,15 @@ static jdouble V8Value_asNumber (
   JNIEnv *env,
   jobject obj
 ) {
-  V8Value* val = (V8Value*) env->GetLongField(obj, valueHandle);
+  V8Value* val = (V8Value*) env->GetLongField(obj, f_V8Value_handle);
   return val->getValue()->NumberValue();
+}
+
+static void V8Value_dispose (
+  JNIEnv *env,
+  jobject obj
+) {
+  delete (V8Value*) env->GetLongField(obj, f_V8Value_handle);
 }
 
 static JNINativeMethod V8Value_Methods[] = {
@@ -109,33 +122,43 @@ static JNINativeMethod V8Value_Methods[] = {
   {"init", "(Lcom/vatedroid/V8Runner;Ljava/lang/String;)V", (void *) V8Value_init_str},
   {"init", "(Lcom/vatedroid/V8Runner;D)V", (void *) V8Value_init_num},
   {"asString", "()Ljava/lang/String;", (void *) V8Value_asString},
-  {"asNumber", "()D", (void *) V8Value_asNumber}
+  {"asNumber", "()D", (void *) V8Value_asNumber},
+  {"dispose", "()V", (void *) V8Value_dispose}
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // GLUE CODE
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Lookup class, and Handle:
-#define CLASS(env, klass, className, method_table, field) {\
-  (klass) = (env)->FindClass(className);\
-  if (!(klass)) { return -1; }\
-  (env)->RegisterNatives(\
-    (klass),\
+#define ENV_INIT(vm)\
+  JNIEnv* env;\
+  if ((vm)->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {\
+    return -1;\
+  }\
+  jclass klass;\
+
+#define CLASS(className)\
+  klass = NULL;\
+  klass = (env)->FindClass(className);\
+  if (!klass) { return -1; }\
+
+#define MTABLE(method_table)\
+  env->RegisterNatives(\
+    klass,\
     (method_table),\
     sizeof((method_table)) / sizeof((method_table)[0])\
   );\
-  field = (env)->GetFieldID((klass), "handle", "J");\
-  if (field == NULL) return -1;\
-}
+
+#define FIELD(fieldName, signature, field)\
+  (field) = env->GetFieldID(klass, (fieldName), (signature));\
+  if ((field) == NULL) return -1;\
 
 // Lookup everything else:
-#define METHOD(env, klass, method, signature, methodID) {\
-  (methodID) = (env)->GetMethodID((klass), "<init>", (signature));\
-}
+#define METHOD(method, signature, methodID)\
+  (methodID) = env->GetMethodID(klass, (method), (signature));\
 
-#define CLASS_END(env, klass) {\
-  (env)->DeleteLocalRef((klass));\
-}
+#define CLASS_END()\
+  env->DeleteLocalRef(klass);\
 
 // We need to tell the JNI environment to find our method names and properly
 //  map them to our C++ methods.
@@ -144,26 +167,30 @@ jint JNI_OnLoad (
   JavaVM* vm,
   void* reserved
 ) {
-  int i=0;
-  while(!i);
+  // int i=0;
+  // while(!i);
+  gjvm = vm;
 
-  JNIEnv* env;
+  ENV_INIT(vm)
 
-  if (vm->GetEnv(reinterpret_cast<void**>(&env), JNI_VERSION_1_6) != JNI_OK) {
-    return -1;
-  }
+  CLASS("com/vatedroid/V8Runner")
+  MTABLE(V8Runner_Methods)
+  FIELD("handle", "J", f_V8Runner_handle)
+  CLASS_END()
 
-  jclass V8Runner_class;
-  CLASS(env, V8Runner_class, "com/vatedroid/V8Runner", V8Runner_Methods, runnerHandle)
-  CLASS_END(env, V8Runner_class)
+  CLASS("com/vatedroid/V8Value")
+  MTABLE(V8Value_Methods)
+  FIELD("handle", "J", f_V8Value_handle)
+  METHOD("<init>", "(Lcom/vatedroid/V8Runner;)V", m_V8Value_init)
+  METHOD("<init>", "(Lcom/vatedroid/V8Runner;Ljava/lang/String;)V", m_V8Value_init_str)
+  METHOD("<init>", "(Lcom/vatedroid/V8Runner;D)V", m_V8Value_init_num)
+  METHOD("<init>", "()V", m_V8Value_init_internal)
+  CLASS_END()
 
-  jclass V8Value_class;
-  CLASS(env, V8Value_class, "com/vatedroid/V8Value", V8Value_Methods, valueHandle)
-  METHOD(env, V8Value_class, "<init>", "(Lcom/vatedroid/V8Runner;)V", value_init)
-  METHOD(env, V8Value_class, "<init>", "(Lcom/vatedroid/V8Runner;Ljava/lang/String;)V", value_init_str)
-  METHOD(env, V8Value_class, "<init>", "(Lcom/vatedroid/V8Runner;D)V", value_init_num)
-  METHOD(env, V8Value_class, "<init>", "()V", value_init_internal)
-  CLASS_END(env, V8Value_class)
+  CLASS("com/vatedroid/V8MappableMethod")
+  //METHOD("methodToRun", "([Lcom/vatedroid/V8Value;)Lcom/vatedroid/V8Value;", m_V8MappableMethod_methodToRun)
+  METHOD("methodToRun", "([Lcom/vatedroid/V8Value;)Lcom/vatedroid/V8Value;", m_V8MappableMethod_methodToRun)
+  CLASS_END()
 
   return JNI_VERSION_1_6;
 }

@@ -8,7 +8,7 @@ class V8Runner;
 
 class V8Value {
   V8Runner* runner;
-  Handle<Value> val;
+  Persistent<Value> val;
 
 public:
   V8Value (V8Runner* _runner);
@@ -16,7 +16,9 @@ public:
   V8Value (V8Runner* _runner, double num);
   V8Value (V8Runner* _runner, Handle<Value> _val);
 
-  Handle<Value> getValue();
+  Handle<Value> getValue ();
+
+  ~V8Value ();
 };
 
 #endif // V8VALUE_H_

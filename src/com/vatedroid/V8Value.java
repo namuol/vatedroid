@@ -14,9 +14,12 @@ public class V8Value {
   public native String asString();
   public native double asNumber();
   
+  private native void dispose();
+  
   private V8Value() {}
   
   public V8Value(V8Runner runner) { init(runner); }
   public V8Value(V8Runner runner, String str) { init(runner, str); }
   public V8Value(V8Runner runner, double num) { init(runner, num); }
+  public void finalize() { dispose(); }
 }
