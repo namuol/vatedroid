@@ -4,7 +4,7 @@ import android.util.Log;
 
 public class FibLib {
   static {
-    System.loadLibrary("gnustl_shared");
+    //System.loadLibrary("gnustl_shared");
     System.loadLibrary("fiblib");
   }
 
@@ -60,7 +60,10 @@ public class FibLib {
     @Override
     public V8Value methodToRun(V8Value[] args) {
       Log.e("methodToRun", "Hello from Java!");
-      Log.e("methodToRun", "Argument 0: " + args[0].asString());
+      Log.e("methodToRun", "Arguments:");
+      for (V8Value val : args) {
+        Log.e("methodToRun", val.toString());
+      }
       return v8.val(0);
     }
 
@@ -74,7 +77,7 @@ public class FibLib {
     v8 = new V8Runner();
     v8.map(new FibLib.TestMappableMethod(), "sayHello");
     v8.runJS(INITIAL_SOURCE);
-    v8.runJS("sayHello(\"Testing\", 1, 2, 3);");
+    v8.runJS("sayHello(\"Testing\", 1, 2, 3, [42,43,44]);");
   }
   
   public static void deinit() {

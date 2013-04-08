@@ -110,6 +110,38 @@ static jdouble V8Value_asNumber (
   return val->getValue()->NumberValue();
 }
 
+static jboolean V8Value_asBoolean (
+  JNIEnv *env,
+  jobject obj
+) {
+  V8Value* val = (V8Value*) env->GetLongField(obj, f_V8Value_handle);
+  return val->getValue()->BooleanValue();
+}
+
+static jboolean V8Value_isString (
+  JNIEnv *env,
+  jobject obj
+) {
+  V8Value* val = (V8Value*) env->GetLongField(obj, f_V8Value_handle);
+  return val->getValue()->IsString();
+}
+
+static jboolean V8Value_isNumber (
+  JNIEnv *env,
+  jobject obj
+) {
+  V8Value* val = (V8Value*) env->GetLongField(obj, f_V8Value_handle);
+  return val->getValue()->IsNumber();
+}
+
+static jboolean V8Value_isBoolean (
+  JNIEnv *env,
+  jobject obj
+) {
+  V8Value* val = (V8Value*) env->GetLongField(obj, f_V8Value_handle);
+  return val->getValue()->IsBoolean();
+}
+
 static void V8Value_dispose (
   JNIEnv *env,
   jobject obj
@@ -121,9 +153,14 @@ static JNINativeMethod V8Value_Methods[] = {
   {"init", "(Lcom/vatedroid/V8Runner;)V", (void *) V8Value_init_void},
   {"init", "(Lcom/vatedroid/V8Runner;Ljava/lang/String;)V", (void *) V8Value_init_str},
   {"init", "(Lcom/vatedroid/V8Runner;D)V", (void *) V8Value_init_num},
+  {"dispose", "()V", (void *) V8Value_dispose},
+  {"isString", "()Z", (void *) V8Value_isString},
+  {"isNumber", "()Z", (void *) V8Value_isNumber},
+  {"isBoolean", "()Z", (void *) V8Value_isBoolean},
   {"asString", "()Ljava/lang/String;", (void *) V8Value_asString},
   {"asNumber", "()D", (void *) V8Value_asNumber},
-  {"dispose", "()V", (void *) V8Value_dispose}
+  {"asBoolean", "()Z", (void *) V8Value_asBoolean},
+  {"toString", "()Ljava/lang/String;", (void *) V8Value_asString}
 };
 
 //////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,7 +225,6 @@ jint JNI_OnLoad (
   CLASS_END()
 
   CLASS("com/vatedroid/V8MappableMethod")
-  //METHOD("methodToRun", "([Lcom/vatedroid/V8Value;)Lcom/vatedroid/V8Value;", m_V8MappableMethod_methodToRun)
   METHOD("methodToRun", "([Lcom/vatedroid/V8Value;)Lcom/vatedroid/V8Value;", m_V8MappableMethod_methodToRun)
   CLASS_END()
 

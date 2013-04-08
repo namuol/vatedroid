@@ -10,9 +10,14 @@ public class V8Value {
   private native boolean isUndefined();
   private native boolean isString();
   private native boolean isNumber();
+  private native boolean isBoolean();
   
   public native String asString();
   public native double asNumber();
+  public native boolean asBoolean();
+  
+  @Override
+  public native String toString();
   
   private native void dispose();
   
